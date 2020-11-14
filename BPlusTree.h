@@ -11,7 +11,8 @@
 #define INDEX_FILE_PATH "index_" //索引文件前缀
 
 
-class BPlusTree {
+class BPlusTree 
+{
     public:
         //创建一个节点对象
         BPlusTreeNode* BPlusTreeNode_new();

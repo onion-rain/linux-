@@ -12,9 +12,9 @@ int main()
     m_table->InsertRecord();
     //m_table->SearchRecord(800,1000,1);
     //m_table->SearchRecord(1702,1702,4);
-    //CLExecutiveFunctionProvider* inserter=new CLExecutiveFunctionInsert();
-    CLExecutiveFunctionProvider* Search=new CLExecutiveFunctionSearch(10, 1000, 8);
-    CLExecutive *pThread=new CLThread(Search);
+    //CLExecutiveFunctions* inserter=new CLExecutiveFunctionInsert();
+    CLExecutiveFunctions* Search=new CLExecutiveFunctionSearch(10, 1000, 8);
+    CLThread *pThread=new CLThread(Search);
     pThread->Run();
     pThread->WaitForDeath();
 }

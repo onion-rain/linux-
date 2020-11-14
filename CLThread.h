@@ -5,11 +5,13 @@
 #include<iostream>
 #include "CLExecutiveFunctions.h"
 
-class CLThread : public CLExecutive
+class CLThread
 {
     public:
-        explicit CLThread(CLExecutiveFunctionProvider* pExecutiveFunctionProvider);
-        virtual ~CLThread();
+        explicit CLThread(CLExecutiveFunctions* pExecutiveFunctionProvider){
+            m_pExecutiveFunctionProvider = pExecutiveFunctionProvider;
+        };
+        virtual ~CLThread(){};
         virtual void Run();
         virtual void WaitForDeath();
 
@@ -17,6 +19,7 @@ class CLThread : public CLExecutive
         static void* StartFunctionOfThread(void* pThis);
 
     private:
+        CLExecutiveFunctions* m_pExecutiveFunctionProvider;
         pthread_t m_ThreadID;
 };
 

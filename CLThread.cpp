@@ -1,10 +1,5 @@
 #include "CLThread.h"
 
-CLThread::CLThread(CLExecutiveFunctionProvider* pExecutiveFunctionProvider):CLExecutive(pExecutiveFunctionProvider) {
-}
-
-CLThread::~CLThread() {
-}
 
 void* CLThread::StartFunctionOfThread(void *pThis){
 
@@ -32,7 +27,3 @@ void CLThread::WaitForDeath(){
         return ;
     }
 }
-
-
-
-
