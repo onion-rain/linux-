@@ -1,0 +1,1 @@
+g++ main.cpp table.cpp CLThread.cpp BPlusTree.cpp -lpthread

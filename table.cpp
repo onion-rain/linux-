@@ -24,7 +24,7 @@ table::table() {
     if (pthread_mutex_init(m_pMutexForOperatingTable, 0) != 0 ) {
         delete m_pMutexForOperatingTable;
         close(m_Fd);
-        throw "In table::table(),pthread_mutex_init error";
+        throw "In table::table(), pthread_mutex_init error";
     }
 }
 
@@ -92,7 +92,7 @@ Record table::CreateRecord() {
     record_num++;
     record.primary_key = record_num;
     for (int i = 0; i < RECORD_LENGTH; i++)
-        record.record_array[i] = rand() % 2000; //属性是随机数，设置范围[0,1000]
+        record.record_array[i] = rand() % 2000; //属性是随机数，设置范围[0, 2000]
     records[record_num - 1] = record;
     return record;
 }
@@ -103,7 +103,6 @@ bool table::AppendRecord(const Record & record) {
         return false;
     return true;
 }
-
 
 //为第col列的属性创建B+树
 BPlusTreeNode* table::CreateBPlusTree(int col) {

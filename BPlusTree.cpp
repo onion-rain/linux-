@@ -1,8 +1,6 @@
 #include "BPlusTree.h"
 
 
-
-
 //创建一个B+树节点
 BPlusTreeNode* BPlusTree::BPlusTreeNode_new() {
     BPlusTreeNode* node = (BPlusTreeNode*)malloc(sizeof(BPlusTreeNode));
@@ -19,8 +17,6 @@ BPlusTreeNode* BPlusTree::BPlusTreeNode_new() {
     return node;
 
 }
-
-
 
 //B+树的创建
 BPlusTreeNode* BPlusTree::BPlusTree_create() {
@@ -73,8 +69,6 @@ int BPlusTree::BPlusTree_Split_Child(BPlusTreeNode* parent, int pos, BPlusTreeNo
     }
     return 1;
 }
-
-
 
 //插入一个未满的节点中
 void BPlusTree::BPlusTree_Insert_NotFull(BPlusTreeNode * node, const IndexNode& indexNode) {
@@ -260,38 +254,6 @@ BPlusTreeNode *BPlusTree::ReadBPlusTreeNode(int &fd, BPlusTreeNode* &leaf_node_p
         return node;
     }
     for (int i = 0; i <= node->num; i++)
-        node->childs[i] = ReadBPlusTreeNode(fd,leaf_node_pre);
+        node->childs[i] = ReadBPlusTreeNode(fd, leaf_node_pre);
     return node;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

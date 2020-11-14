@@ -15,7 +15,7 @@ void* CLThread::StartFunctionOfThread(void *pThis){
 }
 
 void CLThread::Run(){
-    int r=pthread_create(&m_ThreadID,0,StartFunctionOfThread,this);
+    int r=pthread_create(&m_ThreadID, 0, StartFunctionOfThread, this);
 
     if(r!=0)
     {
@@ -25,10 +25,10 @@ void CLThread::Run(){
 }
 
 void CLThread::WaitForDeath(){
-    int r=pthread_join(m_ThreadID,0);
+    int r=pthread_join(m_ThreadID, 0);
     if(r!=0)
     {
-        std::cout<<"In CLThread::WaitForDeath(),pthread_join error"<<std::endl;
+        std::cout<<"In CLThread::WaitForDeath(), pthread_join error"<<std::endl;
         return ;
     }
 }

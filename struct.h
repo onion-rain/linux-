@@ -35,9 +35,4 @@ typedef struct BPlusTreeNode {
     struct BPlusTreeNode* next;
 } BPlusTreeNode;
 
-
 #endif // STRUCT_H
-
-
-
-

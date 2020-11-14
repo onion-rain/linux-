@@ -3,21 +3,21 @@
 
 #include<pthread.h>
 #include<iostream>
-#include "CLExecutive.h"
+#include "CLExecutiveFunctions.h"
 
 class CLThread : public CLExecutive
 {
-public:
-    explicit CLThread(CLExecutiveFunctionProvider* pExecutiveFunctionProvider);
-    virtual ~CLThread();
-    virtual void Run();
-    virtual void WaitForDeath();
+    public:
+        explicit CLThread(CLExecutiveFunctionProvider* pExecutiveFunctionProvider);
+        virtual ~CLThread();
+        virtual void Run();
+        virtual void WaitForDeath();
 
-private:
-    static void* StartFunctionOfThread(void* pThis);
+    private:
+        static void* StartFunctionOfThread(void* pThis);
 
-private:
-    pthread_t m_ThreadID;
+    private:
+        pthread_t m_ThreadID;
 };
 
 
