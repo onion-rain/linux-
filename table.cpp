@@ -1,6 +1,6 @@
 #include "table.h"
 
-table::table() {
+table::table(int init) {
     m_Fd = open(RECORD_FILE, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
     if (m_Fd == -1)
         throw "In table::table(),open error";
@@ -10,7 +10,7 @@ table::table() {
     //判断表格是否为空
     if (lseek(m_Fd, 0, SEEK_END) == 0) {
         record_num = 0;
-        InitializeTable();
+        InitializeTable(init);
     } else {
         record_num = lseek(m_Fd, 0, SEEK_END) / RECORD_SIZE_BYTE;
         lseek(m_Fd, 0, SEEK_SET);
@@ -36,9 +36,9 @@ table::~table() {
     delete[] records;
 }
 
-void table::InitializeTable() {
+void table::InitializeTable(int num) {
     Record record;
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < num; i++) {
         record = CreateRecord();
         if (!AppendRecord(record))
             throw "In table::table(),init error";
@@ -60,7 +60,7 @@ pthread_mutex_t *table::InitializeMutex() {
 }
 
 //获取table实例
-table *table::GetTable() {
+table *table::GetTable(int init) {
 
     /**
     只允许构建一个table实例，因为对表的操作是互斥的
@@ -74,7 +74,7 @@ table *table::GetTable() {
     }
     if (m_table == 0) {
         try {
-            m_table = new table;
+            m_table = new table(init);
         } catch (const char *) {
             pthread_mutex_unlock(m_pMutexForCreatingTable);
             return 0;
@@ -142,8 +142,8 @@ void table::InsertRecord() {
     //DisplayRecord(records[record_num-1]);
     if (!AppendRecord(record))
         throw "In table::InsertRecord(),insert error";
-    std::cout << "已成功添加一条记录：" << std::endl;
-    DisplayRecord(record);
+    std::cout << "已成功添加一条记录!" << std::endl;
+    // DisplayRecord(record);
     //更新索引
     for (int col = 1; col < RECORD_LENGTH + 1; col++) {
         if (Is_Index_File_Exists(col))
@@ -196,13 +196,21 @@ void table::SearchRecord(int left, int right, int col) {
     pthread_mutex_unlock(m_pMutexForOperatingTable);
 }
 
-//显示记录
+// 显示记录
 void table::DisplayRecord(const Record & record) {
     std::cout << "--------------------------------------------------" << std::endl;
     for (int i = 0; i < 10; i++) {//方便展示，只显示记录的前10个属性
         printf("%-5ld", record.record_array[i]);
     }
     std::cout << std::endl;
+}
+
+// 展示全部记录
+void table::DisplayAllRecord() {
+    std::cout << "全部数据：" << std::endl;
+    for(int i=0; i<record_num; i++){
+        DisplayRecord(records[i]);
+    }
 }
 
 

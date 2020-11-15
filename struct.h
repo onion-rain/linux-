@@ -15,8 +15,8 @@
 #define MAX_RECORD_NUM 1000000
 
 typedef struct Record {
-    int64_t primary_key; //主键，即该记录的序号
-    int64_t record_array[RECORD_LENGTH];//属性值
+    int64_t primary_key;                    //主键，即该记录的序号
+    int64_t record_array[RECORD_LENGTH];    //属性值
 } Record;
 
 //索引节点结构
@@ -27,9 +27,9 @@ typedef struct IndexNode {
 
 //B+树节点结构
 typedef struct BPlusTreeNode {
-    IndexNode index_nodes[2 * M - 1];//关键字，即为索引节点
-    struct BPlusTreeNode* childs[2 * M]; //子节点数组
-    int num;//子节点数
+    IndexNode index_nodes[2 * M - 1];       //关键字，即为索引节点
+    struct BPlusTreeNode* childs[2 * M];    //子节点数组
+    int num;                                //子节点数
     bool is_leaf;
     struct BPlusTreeNode* prev;
     struct BPlusTreeNode* next;
